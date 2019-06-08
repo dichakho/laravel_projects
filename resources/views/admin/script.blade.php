@@ -1,6 +1,9 @@
 <!-- jQuery -->
 <script src="admin_resource/bower_components/jquery/dist/jquery.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
 <!-- Bootstrap Core JavaScript -->
 <script src="admin_resource/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -13,7 +16,7 @@
 <!-- DataTables JavaScript -->
 <script src="admin_resource/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
 <script src="admin_resource/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
+<script type="text/javascript" language="javascript" src="admin_resource/ckeditor/ckeditor.js" ></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
 $(document).ready(function() {

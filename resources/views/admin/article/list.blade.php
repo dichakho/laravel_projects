@@ -1,11 +1,22 @@
 @extends('admin.index')
 <!-- Page Content -->
 @section('content')
+<style>
+        #delete a{
+            color: white !important;
+        }
+        #edit a{
+            color: white !important;
+        }
+        #recycle a{
+            color: white !important;
+        }
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Product
+                <h1 class="page-header">Article
                     <small>List</small>
                 </h1>
             </div>
@@ -15,34 +26,44 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Tags</th>
+                        <th>Action</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($article as  $arti)
                     <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Áo Thun Nana</td>
-                        <td>200.000 VNĐ</td>
-                        <td>3 Minutes Age</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                        <td>{{$arti->id}}</td>
+                        <td>
+                            {{str_limit($arti->title, 50)}}
+                        </td>
+                        <td>{{$arti->user->username}}</td>
+                        <td>{{$arti->category->name}}</td>
+                        
+                        <td>
+                            @if ($arti->tag)
+                            @foreach ($arti->tag as $e)
+                                <span class="mx-2 btn" style="background-color: #F6214B; color:white; padding:3px;">{{$e->name}}</span>
+                            @endforeach
+                            @endif
+                            
+                        </td>
+                        
+                        @if($arti->deleted_at == null)           
+                            <td class="btn btn-danger" id="delete"><i class="fa fa-trash-o fa-fw"></i><a href="admin/article/delete/{{$arti->id}}"> Delete </a></td>
+                                
+                            <td class="btn btn-info" id="edit"><i class="fa fa-pencil fa-fw"></i> <a href="admin/article/edit/{{$arti->id}}"> Edit </a></td>
+                        @elseif ($arti->deleted_at != null)                              
+                            <td class="btn btn-success" id="recycle"><i class="fa fa-recycle fa-fw"></i><a href="admin/article/restore/{{$arti->id}}"> Restore </a></td>
+                        @endif
                     </tr>
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Áo Thun Polo</td>
-                        <td>250.000 VNĐ</td>
-                        <td>1 Hours Age</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
+            {{$article->links()}}
         </div>
         <!-- /.row -->
     </div>
